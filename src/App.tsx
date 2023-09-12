@@ -3,7 +3,8 @@ import useTotalHandler from './hooks/useTotalHandler';
 import Services from './components/Services';
 
 function App() {
-  const { total, updateTotal } = useTotalHandler();
+  const { total, subTotal, updateTotal } = useTotalHandler();
+  console.log("subTotal: ", subTotal)
 
   return (
     <>
