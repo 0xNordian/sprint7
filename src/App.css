@@ -51,3 +51,16 @@
 .total{
   margin-top: 1rem;
 }
+
+.web-modal{
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  outline: auto;
+  padding: 1rem;
+}
+
+.web-extra-item > label{
+  display: flex;
+  gap: 1rem;
+}

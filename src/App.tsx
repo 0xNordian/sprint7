@@ -8,6 +8,7 @@ function App() {
   return (
     <>
       <h2>¿Qué quieres hacer?</h2>
+
       <div className="services">
         <Services label={"#web"} price={600} message={"Una página web (600€)"} updateTotal={updateTotal} />
         <Services label={"#seo"} price={300} message={"Una consultoría SEO (300€)"} updateTotal={updateTotal} />
