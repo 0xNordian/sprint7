@@ -5,9 +5,10 @@ type ServicesProps = {
     price: number;
     message: string;
     updateTotal: (label: string, price: number) => void;
+    webSubTotal: (spec: string, qty: number) => void;
 };
 
-const Services = ({ label, price, message, updateTotal }: ServicesProps) => {
+const Services = ({ label, price, message, updateTotal, webSubTotal }: ServicesProps) => {
     if(label.charAt(0) !== "#"){
         console.error(`El label "${label.toUpperCase()}" debe empezar por #`);
     }
@@ -15,6 +16,12 @@ const Services = ({ label, price, message, updateTotal }: ServicesProps) => {
     const handleServiceChange = (label: string, price: number) => {
         updateTotal(label, price);
     };
+
+    const handleWebSubTotal = (spec: string, qty: number) => {
+        console.log("spec: ", spec)
+        console.log("qty: ", qty)
+        webSubTotal(spec, qty);
+    }
 
     let serviceElement: HTMLInputElement | null = null;
 
@@ -36,8 +43,8 @@ const Services = ({ label, price, message, updateTotal }: ServicesProps) => {
             {
                 (serviceElement && serviceElement.checked) && (
                     <div className="web-modal">
-                    <WebExtra message={"Número de páginas"} />
-                    <WebExtra message={"Número de idiomas"} />
+                    <WebExtra spec="numPages" message={"Número de páginas"} handleWebSubTotal={handleWebSubTotal}/>
+                    <WebExtra spec="numLeng" message={"Número de idiomas"} handleWebSubTotal={handleWebSubTotal}/>
                     </div>
                 )
             }
