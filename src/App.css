@@ -40,3 +40,14 @@
 .read-the-docs {
   color: #888;
 }
+
+.services{
+  display: flex;
+  flex-direction: column;
+  text-align: start;
+  gap: 1rem;
+}
+
+.total{
+  margin-top: 1rem;
+}

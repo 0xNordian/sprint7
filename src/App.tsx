@@ -1,35 +1,45 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useState } from 'react';
+import './App.css';
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [total, setTotal] = useState(0);
+
+  const totalHandler = () => {
+    const web = document.querySelector('#web') as HTMLInputElement;
+    const seo = document.querySelector('#seo') as HTMLInputElement;
+    const ads = document.querySelector('#ads') as HTMLInputElement;
+  
+    let total = 0;
+
+    (web.checked) ? total += 500 : total -= 0;
+    (seo.checked) ? total += 300 : total -= 0;
+    (ads.checked) ? total += 200 : total -= 0;
+
+    setTotal(total);
+  }
+
+  console.log("total: ", total);
 
   return (
     <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+      <h2>¿Qué quieres hacer?</h2>
+      <div className="services">
+        <label>
+          <input type="checkbox" name="web" value="web" id="web" className="exclusive-checkbox" onChange={totalHandler}/>
+          Una página web (500€)
+        </label>
+        <label>
+          <input type="checkbox" name="seo" value="seo" id="seo" className="exclusive-checkbox" onChange={totalHandler}/>
+          Una consultoría SEO (300€)
+        </label>
+        <label>
+          <input type="checkbox" name="ads" value="ads" id="ads" className="exclusive-checkbox" onChange={totalHandler}/>
+          Una campanya de Google Ads (200€)
+        </label>
+      <div className="total">Total: {total}</div>
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
     </>
-  )
+  );
 }
 
-export default App
+export default App;
