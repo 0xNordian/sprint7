@@ -6,6 +6,11 @@ function App() {
   const { total, subTotal, updateTotal, webSubTotal } = useTotalHandler();
   console.log("subTotal: ", subTotal)
 
+  const servicePrice = {
+    web: 600,
+    seo: 300,
+    ads: 400
+  }
 
   // Custom comparison function to sort by the value
   // const compareByValue = (
@@ -25,9 +30,9 @@ function App() {
       <h2>¿Qué quieres hacer?</h2>
 
       <div className="services">
-        <Services label={"#web"} price={600} message={"Una página web (600€)"} updateTotal={updateTotal} webSubTotal={webSubTotal}/>
-        <Services label={"#seo"} price={300} message={"Una consultoría SEO (300€)"} updateTotal={updateTotal} webSubTotal={webSubTotal}/>
-        <Services label={"#ads"} price={400} message={"Una campaña de anuncios (400€)"} updateTotal={updateTotal} webSubTotal={webSubTotal}/>
+        <Services label={"#web"} price={servicePrice.web} message={`Una página web (${servicePrice.web}€)`} updateTotal={updateTotal} webSubTotal={webSubTotal}/>
+        <Services label={"#seo"} price={servicePrice.seo} message={`Una consultoría SEO (${servicePrice.seo}€)`} updateTotal={updateTotal} webSubTotal={webSubTotal}/>
+        <Services label={"#ads"} price={servicePrice.ads} message={`Una campaña de anuncios (${servicePrice.ads}€)`} updateTotal={updateTotal} webSubTotal={webSubTotal}/>
 
         <div className="total">Total: {total}€</div>
       </div>
