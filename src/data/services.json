@@ -1,0 +1,23 @@
+{
+    "services": [
+        {
+                "id": 1,
+                "name": "web",
+                "title": "Una página web (600€)",
+                "price": 600
+        },
+        {
+
+                "id": 2,
+                "name": "seo",
+                "title": "Posicionamiento SEO (300€)",
+                "price": 300
+        },
+        {
+                "id": 3,
+                "name": "ads",
+                "title": "Publicidad en Google (200€)",
+                "price": 200
+        }
+    ]
+}

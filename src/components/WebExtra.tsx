@@ -13,7 +13,7 @@ const WebExtra = ({ spec, message, handleWebSubTotal }: WebExtraProps) => {
         <div className="web-extra-item">
             <label>
                 {message}
-                <input type="number" onChange={(e) => handleWebSubTotal(spec, parseInt(e.target.value, 10))}/>
+                <input min="0" type="number" onChange={(e) => handleWebSubTotal(spec, parseInt(e.target.value, 10))}/>
             </label>
         </div>
     )

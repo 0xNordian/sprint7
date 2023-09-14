@@ -1,20 +1,23 @@
 import WebExtra from "./WebExtra";
+import { useState } from "react";
 
 type ServicesProps = {
     label: string;
     price: number;
     message: string;
-    updateTotal: (label: string, price: number) => void;
+    updateTotal: (label: string, price: number, isChecked: boolean) => void;
     webSubTotal: (spec: string, qty: number) => void;
 };
 
 const Services = ({ label, price, message, updateTotal, webSubTotal }: ServicesProps) => {
+    const [isChecked, setIsChecked] = useState(false);
     if(label.charAt(0) !== "#"){
         console.error(`El label "${label.toUpperCase()}" debe empezar por #`);
     }
 
     const handleServiceChange = (label: string, price: number) => {
-        updateTotal(label, price);
+        setIsChecked(prev => !prev);
+        updateTotal(label, price, !isChecked);
     };
 
     const handleWebSubTotal = (spec: string, qty: number) => {
