@@ -12,8 +12,13 @@ const useTotalHandler = () => {
     const [total, setTotal] = useState(0);
     const [subTotal, setSubTotal] = useState<SubTotal>({});
     const [webCalc, setWebCalc] = useState(0);
+    const [budget, setBudget] = useState<SubTotal>([]);
 
-    const updateTotal = (label: keyof SubTotal, price: number, isChecked: boolean) => {
+    const updateTotal = (
+        label: keyof SubTotal, 
+        price: number, 
+        isChecked: boolean) => {
+
         setSubTotal((prevSubTotal) => {
             const updatedSubTotal = { ...prevSubTotal };
 
@@ -39,15 +44,21 @@ const useTotalHandler = () => {
 
     const webTotal = () => {
         setWebCalc(() => {
-            return Math.max(1, subTotal.numPages) * Math.max(1, subTotal.numLang) * 30;
+            return Math.max(1, subTotal.numPages ?? 0) * Math.max(1, subTotal.numLang ?? 0) * 30;
         });
     }
 
-    useEffect(() => {
-        console.log("webCalc:", webCalc)
-    }, [subTotal]);
+    const budgetHandler = () => { 
+        const newObj: SubTotal = {};
+        newObj["name"] = Object.assign({}, subTotal);
+        setBudget((prev) => ([...prev, newObj]));
+    };
 
-    return { total, subTotal, updateTotal, webSubTotal };
+    useEffect(() => {
+        console.log("budgetHandler: ", budget);
+    }, [budget]);
+
+    return { total, subTotal, updateTotal, webSubTotal, budgetHandler };
 };
 
 export default useTotalHandler;
