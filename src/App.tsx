@@ -4,7 +4,7 @@ import Services from './components/Services';
 import data from './utils/dataExtractor'
 
 function App() {
-  const { total, subTotal, updateTotal, webSubTotal, budgetHandler } = useTotalHandler();
+  const { total, subTotal, webCalc, updateTotal, webSubTotal, budgetHandler } = useTotalHandler();
 
   return (
     <>
@@ -21,7 +21,7 @@ function App() {
             webSubTotal={webSubTotal}
           />))}
 
-        <div className="total">Total: {total}€</div>
+        <div className="total">Total: {total + webCalc}€</div>
         <button onClick={budgetHandler}>Submit Budget</button>
       </div>
     </>

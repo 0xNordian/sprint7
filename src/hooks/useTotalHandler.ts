@@ -18,13 +18,18 @@ const useTotalHandler = () => {
     useEffect(() => {
         const isNumPagesEmpty = typeof subTotal.numPages === 'undefined' || subTotal.numPages === 0;
         const isNumLangEmpty = typeof subTotal.numLang === 'undefined' || subTotal.numLang === 0;
-    
+
         const subWebSerCalc = isNumPagesEmpty && isNumLangEmpty ? 0 : (Math.max(1, subTotal.numPages ?? 0) * Math.max(1, subTotal.numLang ?? 0)) * 30;
-    
+
         setWebCalc(subWebSerCalc);
-        setTotal((prev) => prev + webCalc)
+        console.log("total: ", total, "webCalc: ", webCalc)
     }, [subTotal]);
-    
+
+    // useEffect(() => {
+    //     // This useEffect will trigger when webCalc changes
+    //     setTotal((prevTotal) => prevTotal + webCalc);
+    //     console.log("total: ", total, "webCalc: ", webCalc)
+    // }, [webCalc]);
 
     const updateTotal = (
         label: keyof SubTotal,
@@ -55,13 +60,15 @@ const useTotalHandler = () => {
     };
 
     const budgetHandler = () => {
-        const newObj: SubTotal = { ...subTotal, webCalc };
+        const budgetTotal = total + webCalc;
+        const newObj: SubTotal = { ...subTotal, webCalc, budgetTotal };
+        // console.log("newTotal: ", newTotal)
         setBudget((prev) => [...prev, newObj]);
     };
 
     console.log("budgetHandler: ", budget, webCalc);
 
-    return { total, subTotal, updateTotal, webSubTotal, budgetHandler };
+    return { total, subTotal, webCalc, updateTotal, webSubTotal, budgetHandler };
 };
 
 export default useTotalHandler;
