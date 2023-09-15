@@ -9,11 +9,20 @@ type SubTotal = {
     webCalc?: number;
 };
 
+// type BudgetItem = {
+//     title: string;
+//     data: SubTotal;
+// };
+
+type BudgetItem = {
+    [title: string]: SubTotal;
+};
+
 const useTotalHandler = () => {
     const [total, setTotal] = useState(0);
     const [subTotal, setSubTotal] = useState<SubTotal>({});
     const [webCalc, setWebCalc] = useState(0);
-    const [budget, setBudget] = useState<SubTotal[]>([]);
+    const [budget, setBudget] = useState<BudgetItem[]>([]);
 
     useEffect(() => {
         const isNumPagesEmpty = typeof subTotal.numPages === 'undefined' || subTotal.numPages === 0;
@@ -22,14 +31,7 @@ const useTotalHandler = () => {
         const subWebSerCalc = isNumPagesEmpty && isNumLangEmpty ? 0 : (Math.max(1, subTotal.numPages ?? 0) * Math.max(1, subTotal.numLang ?? 0)) * 30;
 
         setWebCalc(subWebSerCalc);
-        console.log("total: ", total, "webCalc: ", webCalc)
     }, [subTotal]);
-
-    // useEffect(() => {
-    //     // This useEffect will trigger when webCalc changes
-    //     setTotal((prevTotal) => prevTotal + webCalc);
-    //     console.log("total: ", total, "webCalc: ", webCalc)
-    // }, [webCalc]);
 
     const updateTotal = (
         label: keyof SubTotal,
@@ -59,16 +61,25 @@ const useTotalHandler = () => {
         });
     };
 
-    const budgetHandler = () => {
+    const budgetHandler = (title: string) => {
         const budgetTotal = total + webCalc;
-        const newObj: SubTotal = { ...subTotal, webCalc, budgetTotal };
-        // console.log("newTotal: ", newTotal)
-        setBudget((prev) => [...prev, newObj]);
+        const newItem = {
+            [title]: { ...subTotal, webCalc, budgetElement: budgetTotal }
+        };
+        setBudget((prev) => [...prev, newItem]);
     };
 
+    // const budgetHandler = (title: string) => {
+    //     const budgetTotal = total + webCalc;
+    //     setBudget((prev) => ({
+    //         ...prev,
+    //         [title]: { ...subTotal, webCalc, budgetElement: budgetTotal }
+    //     }));
+    // };
+    
     console.log("budgetHandler: ", budget, webCalc);
 
-    return { total, subTotal, webCalc, updateTotal, webSubTotal, budgetHandler };
+    return { total, subTotal, budget, webCalc, updateTotal, webSubTotal, budgetHandler };
 };
 
 export default useTotalHandler;
