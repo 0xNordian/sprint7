@@ -16,15 +16,14 @@ const useTotalHandler = () => {
     const [budget, setBudget] = useState<SubTotal[]>([]);
 
     useEffect(() => {
-        // Perform calculations and update DOM here
-        const subWebSerCalc = (
-            (typeof subTotal.numPages === 'undefined' && typeof subTotal.numLang === 'undefined') ?
-                0 :
-                (Math.max(1, subTotal.numPages ?? 0) * Math.max(1, subTotal.numLang ?? 0)) * 30
-        );
-        
+        const isNumPagesEmpty = typeof subTotal.numPages === 'undefined' || subTotal.numPages === 0;
+        const isNumLangEmpty = typeof subTotal.numLang === 'undefined' || subTotal.numLang === 0;
+    
+        const subWebSerCalc = isNumPagesEmpty && isNumLangEmpty ? 0 : (Math.max(1, subTotal.numPages ?? 0) * Math.max(1, subTotal.numLang ?? 0)) * 30;
+    
         setWebCalc(subWebSerCalc);
     }, [subTotal]);
+    
 
     const updateTotal = (
         label: keyof SubTotal,
