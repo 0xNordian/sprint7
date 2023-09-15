@@ -22,6 +22,7 @@ const useTotalHandler = () => {
         const subWebSerCalc = isNumPagesEmpty && isNumLangEmpty ? 0 : (Math.max(1, subTotal.numPages ?? 0) * Math.max(1, subTotal.numLang ?? 0)) * 30;
     
         setWebCalc(subWebSerCalc);
+        setTotal((prev) => prev + webCalc)
     }, [subTotal]);
     
 
@@ -39,7 +40,6 @@ const useTotalHandler = () => {
                 delete updatedSubTotal[label];
             }
 
-            // Calculate the total by summing up subTotals
             const calculatedTotal = Object.values(updatedSubTotal).reduce((acc, val) => acc + (val || 0), 0);
 
             setTotal(calculatedTotal);

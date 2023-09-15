@@ -5,7 +5,6 @@ import data from './utils/dataExtractor'
 
 function App() {
   const { total, subTotal, updateTotal, webSubTotal, budgetHandler } = useTotalHandler();
-  // console.log("subTotal: ", subTotal)
 
   return (
     <>
@@ -24,12 +23,6 @@ function App() {
 
         <div className="total">Total: {total}€</div>
         <button onClick={budgetHandler}>Submit Budget</button>
-        <ul>
-          {Object.entries(subTotal).map(([key, value]) => <li key={key}>{key}: {value}</li>)}
-        </ul>
-        {/* <ul>
-          {Object.entries(subTotal).map((items, index) => <li key={index}>{items}</li>)}
-        </ul> */}
       </div>
     </>
   );
