@@ -23,10 +23,13 @@ function App() {
           />))}
 
         <div className="total">Total: {total}€</div>
-        {/* <ul>
-          {Object.entries(subTotal).map(([key, value]) => <li key={key}>{key}: {value}</li>)}
-        </ul> */}
         <button onClick={budgetHandler}>Submit Budget</button>
+        <ul>
+          {Object.entries(subTotal).map(([key, value]) => <li key={key}>{key}: {value}</li>)}
+        </ul>
+        {/* <ul>
+          {Object.entries(subTotal).map((items, index) => <li key={index}>{items}</li>)}
+        </ul> */}
       </div>
     </>
   );

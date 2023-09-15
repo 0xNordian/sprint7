@@ -27,6 +27,7 @@ const Services = ({ label, price, message, updateTotal, webSubTotal }: ServicesP
     };
 
     const handleWebSubTotal = (spec: string, qty: number) => {
+        // console.log("spec: ", spec, "qty: ", qty)
         webSubTotal(spec, qty);
     }
 
@@ -45,7 +46,7 @@ const Services = ({ label, price, message, updateTotal, webSubTotal }: ServicesP
                 isWebChecked && isChecked && (
                     <div className="web-modal">
                         <WebExtra spec="numPages" message={"Número de páginas"} handleWebSubTotal={handleWebSubTotal} />
-                        <WebExtra spec="numLeng" message={"Número de idiomas"} handleWebSubTotal={handleWebSubTotal} />
+                        <WebExtra spec="numLang" message={"Número de idiomas"} handleWebSubTotal={handleWebSubTotal} />
                     </div>
                 )
             }
