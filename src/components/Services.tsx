@@ -13,10 +13,6 @@ const Services = ({ label, price, message, updateTotal, webSubTotal }: ServicesP
     const [isChecked, setIsChecked] = useState(false);
     const [isWebChecked, setIsWebChecked] = useState(false);
 
-    // if (label.charAt(0) !== "#") {
-    //     console.error(`El label "${label.toUpperCase()}" debe empezar por #`);
-    // }
-
     const handleServiceChange = (label: string, price: number) => {
         setIsChecked(prev => !prev);
         updateTotal(label, price, !isChecked);

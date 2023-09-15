@@ -9,11 +9,6 @@ type SubTotal = {
     webCalc?: number;
 };
 
-// type BudgetItem = {
-//     title: string;
-//     data: SubTotal;
-// };
-
 type BudgetItem = {
     [title: string]: SubTotal;
 };
@@ -27,7 +22,6 @@ const useTotalHandler = () => {
     useEffect(() => {
         const isNumPagesEmpty = typeof subTotal.numPages === 'undefined' || subTotal.numPages === 0;
         const isNumLangEmpty = typeof subTotal.numLang === 'undefined' || subTotal.numLang === 0;
-
         const subWebSerCalc = isNumPagesEmpty && isNumLangEmpty ? 0 : (Math.max(1, subTotal.numPages ?? 0) * Math.max(1, subTotal.numLang ?? 0)) * 30;
 
         setWebCalc(subWebSerCalc);
@@ -48,7 +42,6 @@ const useTotalHandler = () => {
             }
 
             const calculatedTotal = Object.values(updatedSubTotal).reduce((acc, val) => acc + (val || 0), 0);
-
             setTotal(calculatedTotal);
 
             return updatedSubTotal;
@@ -68,16 +61,8 @@ const useTotalHandler = () => {
         };
         setBudget((prev) => [...prev, newItem]);
     };
-
-    // const budgetHandler = (title: string) => {
-    //     const budgetTotal = total + webCalc;
-    //     setBudget((prev) => ({
-    //         ...prev,
-    //         [title]: { ...subTotal, webCalc, budgetElement: budgetTotal }
-    //     }));
-    // };
     
-    console.log("budgetHandler: ", budget, webCalc);
+    // console.log("budgetHandler: ", budget, webCalc);
 
     return { total, subTotal, budget, webCalc, updateTotal, webSubTotal, budgetHandler };
 };

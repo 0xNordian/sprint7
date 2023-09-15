@@ -28,7 +28,6 @@ function App() {
           <input  
             type="text"
             id={"budget"}
-            // className="exclusive-checkbox"
             value={budgetName}
             onChange={(e) => setBudgetName(e.target.value)}/>
         </label>
@@ -36,7 +35,7 @@ function App() {
         <div className="budget">
           {budget.map((item, index) => (
             <div className="budget-card" key={index}>
-              <h3>{Object.keys(item)[0]}</h3> {/* Display the title */}
+              <h3>{Object.keys(item)[0]}</h3>
               <ul className="budget-summary">
                 <li>
                   <strong>web:</strong> {item[Object.keys(item)[0]].web}
@@ -52,7 +51,6 @@ function App() {
                   <strong>ads:</strong> {item[Object.keys(item)[0]].ads}
                 </li>
                 <p><strong>Total:</strong> {item[Object.keys(item)[0]].budgetElement}</p>
-                {/* Add other summary information as needed */}
               </ul>
             </div>
           ))}

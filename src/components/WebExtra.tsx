@@ -1,5 +1,3 @@
-// import { useState } from "react";
-
 type WebExtraProps = {
     spec: string;
     message: string;
@@ -7,9 +5,6 @@ type WebExtraProps = {
 }
 
 const WebExtra = ({ spec, message, handleWebSubTotal }: WebExtraProps) => {
-    // const [serviceQty, setServiceqty] = useState(0);
-    // console.log("serviceQty: ", serviceQty)
-    
     return (
         <div className="web-extra-item">
             <label>
