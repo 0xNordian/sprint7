@@ -17,7 +17,12 @@ const useTotalHandler = () => {
 
     useEffect(() => {
         // Perform calculations and update DOM here
-        const subWebSerCalc = (Math.max(1, subTotal.numPages ?? 0) * Math.max(1, subTotal.numLang ?? 0)) * 30;
+        const subWebSerCalc = (
+            (typeof subTotal.numPages === 'undefined' && typeof subTotal.numLang === 'undefined') ?
+                0 :
+                (Math.max(1, subTotal.numPages ?? 0) * Math.max(1, subTotal.numLang ?? 0)) * 30
+        );
+        
         setWebCalc(subWebSerCalc);
     }, [subTotal]);
 
