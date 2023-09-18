@@ -16,15 +16,12 @@ const Services = ({ label, price, message, updateTotal, webSubTotal }: ServicesP
     const handleServiceChange = (label: string, price: number) => {
         setIsChecked(prev => !prev);
         updateTotal(label, price, !isChecked);
-
         if (label === "web") {
             setIsWebChecked((prev) => !prev);
         }
     };
-
+    
     const handleWebSubTotal = (spec: string, qty: number) => {
-        
-        console.log("spec: ", spec, "qty: ", qty)
         webSubTotal(spec, qty);
     }
 

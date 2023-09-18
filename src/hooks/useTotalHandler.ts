@@ -34,14 +34,16 @@ const useTotalHandler = () => {
     ) => {
         setSubTotal((prevSubTotal) => {
             const updatedSubTotal = { ...prevSubTotal };
-
             if (isChecked) {
                 updatedSubTotal[label] = price;
             } else {
                 delete updatedSubTotal[label];
             }
+            const keysToExclude = ['numLang', 'numPages'];
+            const calculatedTotal = Object.values(updatedSubTotal)
+                .filter(key => !keysToExclude.includes(key))
+                .reduce((acc, val) => acc + (val || 0), 0);
 
-            const calculatedTotal = Object.values(updatedSubTotal).reduce((acc, val) => acc + (val || 0), 0);
             setTotal(calculatedTotal);
 
             return updatedSubTotal;
@@ -60,9 +62,8 @@ const useTotalHandler = () => {
             [title]: { ...subTotal, webCalc, budgetElement: budgetTotal }
         };
         setBudget((prev) => [...prev, newItem]);
+        // setSubTotal({});
     };
-    
-    // console.log("budgetHandler: ", budget, webCalc);
 
     return { total, subTotal, budget, webCalc, updateTotal, webSubTotal, budgetHandler };
 };

@@ -30,8 +30,8 @@ const WebExtra = ({ spec, message, handleWebSubTotal }: WebExtraProps) => {
     return (
         <div className="web-extra-item">
             <label>
-                {message}
-                <button onClick={() => operationHandler("-")}>-</button>
+                <span>{message}</span>
+                <button className={"btn-operator"} onClick={() => operationHandler("-")}>-</button>
                 <input
                     min="0"
                     type="number"
@@ -39,7 +39,7 @@ const WebExtra = ({ spec, message, handleWebSubTotal }: WebExtraProps) => {
                     onChange={(e) => {
                         setQty(parseInt(e.target.value, 10));
                     }} />
-                <button onClick={() => operationHandler("+")}>+</button>
+                <button className={"btn-operator"} onClick={() => operationHandler("+")}>+</button>
             </label>
         </div>
     )

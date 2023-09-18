@@ -11,9 +11,11 @@
   will-change: filter;
   transition: filter 300ms;
 }
+
 .logo:hover {
   filter: drop-shadow(0 0 2em #646cffaa);
 }
+
 .logo.react:hover {
   filter: drop-shadow(0 0 2em #61dafbaa);
 }
@@ -22,6 +24,7 @@
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }
@@ -41,26 +44,104 @@
   color: #888;
 }
 
-.services{
+.services {
   display: flex;
   flex-direction: column;
   text-align: start;
   gap: 1rem;
 }
 
-.total{
+.total {
   margin-top: 1rem;
 }
 
-.web-modal{
+.web-modal {
   display: flex;
   flex-direction: column;
   gap: 1rem;
-  outline: auto;
+  border: 2px solid gray;
+  border-radius: 5px;
   padding: 1rem;
 }
 
-.web-extra-item > label{
+.web-extra-item > label {
   display: flex;
   gap: 1rem;
+}
+
+.btn-operator {
+  background-color: teal;
+  font-size: larger;
+  padding: 0.4rem 1rem;
+}
+
+.budget {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  border: 2px solid gray;
+  border-radius: 5px;
+}
+
+.budget-card {
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 16px;
+  margin: 16px;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+  width: 80%;
+}
+
+.budget-card h3 {
+  font-size: 24px;
+  margin-bottom: 10px;
+  color: #333;
+}
+
+.budget-summary {
+  list-style: none;
+  padding: 0;
+}
+
+.budget-summary li {
+  margin-bottom: 8px;
+  font-size: 16px;
+  color: #555;
+}
+
+.budget-summary li strong {
+  font-weight: bold;
+}
+
+.budget-summary p {
+  margin-top: 10px;
+  font-size: 18px;
+  color: #333;
+  border-top: #37424b 1px solid;
+}
+
+.web-extra-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.web-extra-item > label > span {
+  display: grid;
+  place-items: center;
+}
+
+/* Remove the number input spinners */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Hide the number input arrows in Firefox */
+input[type="number"] {
+  -moz-appearance: textfield;
 }
