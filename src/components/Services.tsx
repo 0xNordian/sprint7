@@ -23,7 +23,8 @@ const Services = ({ label, price, message, updateTotal, webSubTotal }: ServicesP
     };
 
     const handleWebSubTotal = (spec: string, qty: number) => {
-        // console.log("spec: ", spec, "qty: ", qty)
+        
+        console.log("spec: ", spec, "qty: ", qty)
         webSubTotal(spec, qty);
     }
 
