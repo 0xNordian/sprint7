@@ -1,12 +1,15 @@
 import { useEffect, useState } from "react";
+import Modal from "./Modal";
 
 type WebExtraProps = {
     spec: string;
     message: string;
     handleWebSubTotal: (spec: string, qty: number) => void;
+    info: string;
+    modalId: string;
 }
 
-const WebExtra = ({ spec, message, handleWebSubTotal }: WebExtraProps) => {
+const WebExtra = ({ spec, message, info, modalId, handleWebSubTotal }: WebExtraProps) => {
     const [qty, setQty] = useState(0);
 
     const operationHandler = (operation: string) => {
@@ -37,6 +40,7 @@ const WebExtra = ({ spec, message, handleWebSubTotal }: WebExtraProps) => {
                     }} />
                 <button className={"btn-operator"} onClick={() => operationHandler("+")}>+</button>
             </label>
+            <Modal info={info} modalId={modalId}/>
         </div>
     )
 }

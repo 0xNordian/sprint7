@@ -49,8 +49,8 @@ const Services = ({ label, price, message, updateTotal, webSubTotal, isBudgetSub
             {
                 isWebChecked && isChecked && (
                     <div className="web-modal">
-                        <WebExtra spec="numPages" message={"Número de páginas"} handleWebSubTotal={handleWebSubTotal} />
-                        <WebExtra spec="numLang" message={"Número de idiomas"} handleWebSubTotal={handleWebSubTotal} />
+                        <WebExtra spec="numPages" message={"Número de páginas"} info={"Por favor, indique la cantidad de páginas que le gustaría tener en su sitio web."} handleWebSubTotal={handleWebSubTotal} modalId="modal_numPages"/>
+                        <WebExtra spec="numLang" message={"Número de idiomas"} info={"Por favor, indique la cantidad de idiomas en los que le gustaría que traduzcamos su sitio web."} handleWebSubTotal={handleWebSubTotal} modalId="modal_numLang"/>
                     </div>
                 )
             }
