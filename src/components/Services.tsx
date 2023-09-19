@@ -8,13 +8,15 @@ type ServicesProps = {
     updateTotal: (label: string, price: number, isChecked: boolean) => void;
     webSubTotal: (spec: string, qty: number) => void;
     isBudgetSubmitted: boolean;
+    setBudgetName?: (budgetName: string) => void;
 };
 
-const Services = ({ label, price, message, updateTotal, webSubTotal, isBudgetSubmitted }: ServicesProps) => {
+const Services = ({ label, price, message, updateTotal, webSubTotal, isBudgetSubmitted, setBudgetName }: ServicesProps) => {
     const [isChecked, setIsChecked] = useState(false);
     const [isWebChecked, setIsWebChecked] = useState(false);
     useEffect(() => {
             resetForm();
+            setBudgetName && setBudgetName("");
         }, [isBudgetSubmitted]);
 
     const handleServiceChange = (label: string, price: number) => {

@@ -17,7 +17,7 @@ const Modal = ({ info, modalId }) => {
                     <p className="py-4">{info}</p>
                 </div>
                 <form method="dialog" className="modal-backdrop">
-                    <button>close</button>
+                    <button>X</button>
                 </form>
             </dialog>
         </div>
@@ -25,4 +25,3 @@ const Modal = ({ info, modalId }) => {
 }
 
 export default Modal
-

@@ -27,6 +27,7 @@ const Budget = () => {
             <BudgetInput
                 updateTotal={updateTotal}
                 webSubTotal={webSubTotal}
+                setBudgetName={setBudgetName}
                 total={total}
                 webCalc={webCalc}
                 isBudgetSubmitted={isBudgetSubmitted}

@@ -1,7 +1,7 @@
 import Services from '../components/Services'
 import data from '../utils/dataExtractor'
 
-const BudgetInput = ({ total, webCalc, updateTotal, webSubTotal, isBudgetSubmitted }) => {
+const BudgetInput = ({ total, webCalc, updateTotal, webSubTotal, isBudgetSubmitted, setBudgetName }) => {
     return (
         <div className="services">
             {data.map((service =>
@@ -13,6 +13,7 @@ const BudgetInput = ({ total, webCalc, updateTotal, webSubTotal, isBudgetSubmitt
                     updateTotal={updateTotal}
                     webSubTotal={webSubTotal}
                     isBudgetSubmitted={isBudgetSubmitted}
+                    setBudgetName={setBudgetName}
                 />))}
 
             <div className="total">Total: {total + webCalc}€</div>
