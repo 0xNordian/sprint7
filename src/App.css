@@ -174,5 +174,24 @@ input[type="number"] {
 }
 
 .date{
-  color: #000
+  color: #000;
+  margin: 0;
+  padding: 3px;
+}
+
+.extra-info{
+  outline: .5px solid gray;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  border-radius: 5px;
+}
+
+.btn-grp{
+  /* transition: transform 0.2s; */
+  font-size: 1.3rem;
+}
+
+.btn-grp:hover{
+  /* transform: scale(1.1); */
 }

@@ -1,13 +1,29 @@
 import { useState, useEffect } from 'react';
 import BudgetInput from './BudgetInput';
 import useTotalHandler from '../hooks/useTotalHandler';
+import ButtonGroup from './ButtonGroup';
 
 const Budget = () => {
     const [budgetName, setBudgetName] = useState("");
     const [clientName, setClientName] = useState("");
     const [isBudgetSubmitted, setIsBudgetSubmitted] = useState(false);
-    const { total, subTotal, webCalc, budget, budgetHandler, updateTotal, webSubTotal } = useTotalHandler();
+    const { total, subTotal, webCalc, budget, budgetHandler, updateTotal, webSubTotal, setBudget } = useTotalHandler();
     const budgetLength = budget.length;
+
+    const sortByTitle = () => {
+        const sortedBudget = [...budget].sort((a, b) => a.title > b.title ? 1 : -1);
+        setBudget(sortedBudget);
+    };
+
+    const sortByDate = () => {
+        const sortedBudget = [...budget].sort((a, b) => a.date - b.date ? 1 : -1);
+        setBudget(sortedBudget);
+    };
+
+    const resetOrder = () => {
+        const sortedBudget = [...budget].sort((a, b) => a.budgetItemNumber - b.budgetItemNumber ? 1 : -1);
+        setBudget(sortedBudget);
+    };
 
     useEffect(() => {
         if (subTotal) {
@@ -51,6 +67,9 @@ const Budget = () => {
             {budgetLength > 0 &&
                 <div className="budget">
                     <h3>Budget Summary</h3>
+                    <div>
+                        <ButtonGroup sortByTitle={sortByTitle} sortByDate={sortByDate} resetOrder={resetOrder}/>
+                    </div>
                     {budget.map((item, index) => (
                         <div className="budget-card" key={index}>
                             <h3>{Object.keys(item)[0]}</h3>
@@ -81,7 +100,10 @@ const Budget = () => {
                                 }
                                 <p><strong>Total:</strong> {item[Object.keys(item)[0]].budgetElement}€</p>
                             </ul>
-                            <p className="date">{item[Object.keys(item)[0]].date}</p>
+                            <div className="extra-info">
+                                <small className="date">{item[Object.keys(item)[0]].date}</small>
+                                <small className="date">{item[Object.keys(item)[0]].clientName}</small>
+                            </div>
                         </div>
                     ))}
                 </div>

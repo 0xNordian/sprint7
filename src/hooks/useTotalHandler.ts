@@ -19,6 +19,7 @@ const useTotalHandler = () => {
     const [subTotal, setSubTotal] = useState<SubTotal>({});
     const [webCalc, setWebCalc] = useState(0);
     const [budget, setBudget] = useLocalStorage('budget', [] as BudgetItem[]);
+    const [budgetItemNumber, setBudgetItemNumber] = useState(1);
 
     useEffect(() => {
         const isNumPagesEmpty = typeof subTotal.numPages === 'undefined' || subTotal.numPages === 0;
@@ -55,12 +56,18 @@ const useTotalHandler = () => {
             return { ...prev, [spec]: qty };
         });
     };
+
+    const budgetItemNumberHandler = () => {
+        setBudgetItemNumber((prev) => prev + 1);
+    }
+
 console.log("budget: ", budget);
     const budgetHandler = (title: string, clientName: string) => {
-        const date = new Date().toLocaleDateString();
+        budgetItemNumberHandler();
+        const date = new Date().toLocaleString();
         const budgetTotal = total + webCalc;
         const newItem = {
-            [title]: { ...subTotal, webCalc, budgetElement: budgetTotal, clientName: clientName, date: date }
+            [title]: { ...subTotal, webCalc, budgetElement: budgetTotal, clientName: clientName, date: date, budgetItemNumber: budgetItemNumber }
         };
 
         const updatedBudget = [...budget, newItem];
@@ -75,7 +82,7 @@ console.log("budget: ", budget);
         setTotal(0);
     };
 
-    return { total, subTotal, budget, webCalc, updateTotal, webSubTotal, budgetHandler };
+    return { total, subTotal, budget, webCalc, updateTotal, webSubTotal, budgetHandler, setBudget };
 };
 
 export default useTotalHandler;
