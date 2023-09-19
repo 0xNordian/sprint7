@@ -1,5 +1,5 @@
 import WebExtra from "./WebExtra";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 type ServicesProps = {
     label: string;
@@ -7,11 +7,15 @@ type ServicesProps = {
     message: string;
     updateTotal: (label: string, price: number, isChecked: boolean) => void;
     webSubTotal: (spec: string, qty: number) => void;
+    isBudgetSubmitted: boolean;
 };
 
-const Services = ({ label, price, message, updateTotal, webSubTotal }: ServicesProps) => {
+const Services = ({ label, price, message, updateTotal, webSubTotal, isBudgetSubmitted }: ServicesProps) => {
     const [isChecked, setIsChecked] = useState(false);
     const [isWebChecked, setIsWebChecked] = useState(false);
+    useEffect(() => {
+            resetForm();
+        }, [isBudgetSubmitted]);
 
     const handleServiceChange = (label: string, price: number) => {
         setIsChecked(prev => !prev);
@@ -25,10 +29,16 @@ const Services = ({ label, price, message, updateTotal, webSubTotal }: ServicesP
         webSubTotal(spec, qty);
     }
 
+    const resetForm = () => {
+        setIsChecked(false);
+        setIsWebChecked(false);
+    };
+    
     return (
         <>
             <label>
                 <input
+                    checked={isChecked}
                     type="checkbox"
                     id={label.slice(1)}
                     className="exclusive-checkbox"

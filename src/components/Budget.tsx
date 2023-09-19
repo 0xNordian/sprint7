@@ -1,11 +1,18 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import BudgetInput from './BudgetInput';
 import useTotalHandler from '../hooks/useTotalHandler';
 
 const Budget = () => {
     const [budgetName, setBudgetName] = useState("");
-    const { total, webCalc, budget, budgetHandler, updateTotal, webSubTotal } = useTotalHandler();
+    const [isBudgetSubmitted, setIsBudgetSubmitted] = useState(false);
+    const { total, subTotal, webCalc, budget, budgetHandler, updateTotal, webSubTotal } = useTotalHandler();
     const budgetLength = budget.length;
+
+    useEffect(() => {
+        if(subTotal) {
+            setIsBudgetSubmitted(false)
+        }
+    }, [subTotal])
 
     return (
         <>
@@ -17,14 +24,18 @@ const Budget = () => {
                     value={budgetName}
                     onChange={(e) => setBudgetName(e.target.value)} />
             </label>
-
             <BudgetInput
                 updateTotal={updateTotal}
                 webSubTotal={webSubTotal}
                 total={total}
                 webCalc={webCalc}
+                isBudgetSubmitted={isBudgetSubmitted}
             />
-            <button onClick={() => budgetHandler(budgetName)}>Submit Budget</button>
+            <button onClick={() => {
+                budgetHandler(budgetName)
+                setIsBudgetSubmitted(true)
+            }
+            }>Submit Budget</button>
 
             {budgetLength > 0 &&
                 <div className="budget">
@@ -33,20 +44,31 @@ const Budget = () => {
                         <div className="budget-card" key={index}>
                             <h3>{Object.keys(item)[0]}</h3>
                             <ul className="budget-summary">
-                                <li>
-                                    <strong>web:</strong> {item[Object.keys(item)[0]].web}
-                                </li>
+                                {item[Object.keys(item)[0]].web > 0 &&
+                                    <li>
+                                        <strong>web:</strong> {item[Object.keys(item)[0]].web}€
+                                    </li>
+                                }
                                 <ul>
-                                    <li>Number of pages: {item[Object.keys(item)[0]].numPages}</li>
-                                    <li>Number of languages: {item[Object.keys(item)[0]].numLang}</li>
+                                    {(item[Object.keys(item)[0]].numLang > 0 || item[Object.keys(item)[0]].numPages > 0) &&
+                                        <>
+                                            <li>Number of pages: {item[Object.keys(item)[0]].numPages}</li>
+                                            <li>Number of languages: {item[Object.keys(item)[0]].numLang}</li>
+                                            <li>SubTotal: {Math.max(1, item[Object.keys(item)[0]].numLang) * Math.max(1, item[Object.keys(item)[0]].numPages) * 30}€ for {item[Object.keys(item)[0]].numLang + item[Object.keys(item)[0]].numPages} extras</li>
+                                        </>
+                                    }
                                 </ul>
-                                <li>
-                                    <strong>seo:</strong> {item[Object.keys(item)[0]].seo}
-                                </li>
-                                <li>
-                                    <strong>ads:</strong> {item[Object.keys(item)[0]].ads}
-                                </li>
-                                <p><strong>Total:</strong> {item[Object.keys(item)[0]].budgetElement}</p>
+                                {item[Object.keys(item)[0]].seo > 0 &&
+                                    <li>
+                                        <strong>seo:</strong> {item[Object.keys(item)[0]].seo}€
+                                    </li>
+                                }
+                                {item[Object.keys(item)[0]].ads &&
+                                    <li>
+                                        <strong>ads:</strong> {item[Object.keys(item)[0]].ads}€
+                                    </li>
+                                }
+                                <p><strong>Total:</strong> {item[Object.keys(item)[0]].budgetElement}€</p>
                             </ul>
                         </div>
                     ))}

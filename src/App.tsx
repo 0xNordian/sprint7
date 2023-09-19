@@ -1,8 +1,4 @@
 import './App.css';
-// import useTotalHandler from './hooks/useTotalHandler';
-// import Budget from './components/Budget';
-// import Services from './components/Services';
-// import data from './utils/dataExtractor'
 import {
   createBrowserRouter,
   Route,
@@ -28,12 +24,6 @@ function App() {
 
   return (
     <RouterProvider router={router} />
-    // <>
-    //   <h2>¿Qué quieres hacer?</h2>
-    //   <div className="services">
-    //     <Budget />
-    //   </div>
-    // </>
   );
 }
 

@@ -9,10 +9,6 @@ type WebExtraProps = {
 const WebExtra = ({ spec, message, handleWebSubTotal }: WebExtraProps) => {
     const [qty, setQty] = useState(0);
 
-    // const operationHandler = (operation: string) => {
-    //         setQty(operation === '+' ? (prev) => prev + 1 : (prev) => prev - 1)
-    // }
-
     const operationHandler = (operation: string) => {
         if (operation === "+") {
             setQty((prev) => prev + 1);
