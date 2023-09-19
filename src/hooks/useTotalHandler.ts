@@ -57,9 +57,10 @@ const useTotalHandler = () => {
     };
 // console.log("budget: ", budget);
     const budgetHandler = (title: string, clientName: string) => {
+        const date = new Date().toLocaleDateString();
         const budgetTotal = total + webCalc;
         const newItem = {
-            [title]: { ...subTotal, webCalc, budgetElement: budgetTotal, clientName: clientName }
+            [title]: { ...subTotal, webCalc, budgetElement: budgetTotal, clientName: clientName, date: date }
         };
 
         const updatedBudget = [...budget, newItem];
