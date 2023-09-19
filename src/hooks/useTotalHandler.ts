@@ -55,11 +55,11 @@ const useTotalHandler = () => {
             return { ...prev, [spec]: qty };
         });
     };
-
-    const budgetHandler = (title: string) => {
+// console.log("budget: ", budget);
+    const budgetHandler = (title: string, clientName: string) => {
         const budgetTotal = total + webCalc;
         const newItem = {
-            [title]: { ...subTotal, webCalc, budgetElement: budgetTotal }
+            [title]: { ...subTotal, webCalc, budgetElement: budgetTotal, clientName: clientName }
         };
 
         const updatedBudget = [...budget, newItem];

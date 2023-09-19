@@ -4,6 +4,7 @@ import useTotalHandler from '../hooks/useTotalHandler';
 
 const Budget = () => {
     const [budgetName, setBudgetName] = useState("");
+    const [clientName, setClientName] = useState("");
     const [isBudgetSubmitted, setIsBudgetSubmitted] = useState(false);
     const { total, subTotal, webCalc, budget, budgetHandler, updateTotal, webSubTotal } = useTotalHandler();
     const budgetLength = budget.length;
@@ -24,16 +25,25 @@ const Budget = () => {
                     value={budgetName}
                     onChange={(e) => setBudgetName(e.target.value)} />
             </label>
+            <label>
+                {"Client name: "}
+                <input
+                    type="text"
+                    id={"client"}
+                    value={clientName}
+                    onChange={(e) => setClientName(e.target.value)} />
+            </label>
             <BudgetInput
                 updateTotal={updateTotal}
                 webSubTotal={webSubTotal}
                 setBudgetName={setBudgetName}
+                setClientName={setClientName}
                 total={total}
                 webCalc={webCalc}
                 isBudgetSubmitted={isBudgetSubmitted}
             />
             <button onClick={() => {
-                budgetHandler(budgetName)
+                budgetHandler(budgetName, clientName)
                 setIsBudgetSubmitted(true)
             }
             }>Submit Budget</button>
