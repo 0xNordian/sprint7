@@ -172,3 +172,7 @@ input[type="number"] {
   background-color: rgba(0, 0, 0, 0.5); /* Adjust the background color and opacity as needed */
   z-index: 1;
 }
+
+.date{
+  color: #000
+}

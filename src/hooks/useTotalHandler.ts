@@ -55,7 +55,7 @@ const useTotalHandler = () => {
             return { ...prev, [spec]: qty };
         });
     };
-// console.log("budget: ", budget);
+console.log("budget: ", budget);
     const budgetHandler = (title: string, clientName: string) => {
         const date = new Date().toLocaleDateString();
         const budgetTotal = total + webCalc;

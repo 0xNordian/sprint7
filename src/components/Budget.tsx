@@ -10,7 +10,7 @@ const Budget = () => {
     const budgetLength = budget.length;
 
     useEffect(() => {
-        if(subTotal) {
+        if (subTotal) {
             setIsBudgetSubmitted(false)
         }
     }, [subTotal])
@@ -81,6 +81,7 @@ const Budget = () => {
                                 }
                                 <p><strong>Total:</strong> {item[Object.keys(item)[0]].budgetElement}€</p>
                             </ul>
+                            <p className="date">{item[Object.keys(item)[0]].date}</p>
                         </div>
                     ))}
                 </div>
