@@ -7,22 +7,42 @@ const Budget = () => {
     const [budgetName, setBudgetName] = useState("");
     const [clientName, setClientName] = useState("");
     const [isBudgetSubmitted, setIsBudgetSubmitted] = useState(false);
-    const { total, subTotal, webCalc, budget, budgetHandler, updateTotal, webSubTotal, setBudget } = useTotalHandler();
+    const [sortedBudget, setSortedBudget] = useState([]);
+    const [dateOrder, setDateOrder] = useState<"asc" | "dsc">("asc");
+    const { total, subTotal, webCalc, budget, budgetHandler, updateTotal, webSubTotal } = useTotalHandler();
+    const [usedArr, setUsedArr] = useState<typeof budget | typeof sortedBudget>(budget)
     const budgetLength = budget.length;
 
     const sortByTitle = () => {
-        const sortedBudget = [...budget].sort((a, b) => a.title > b.title ? 1 : -1);
-        setBudget(sortedBudget);
+        const arr = [...budget];
+    
+        const sortedBudgetCopy = arr.sort((a, b) => {
+            const keyA = Object.keys(a)[0]; 
+            const keyB = Object.keys(b)[0]; 
+            return keyA.localeCompare(keyB);
+        });
+        console.log("title sortedBudgetCopy: ", sortedBudgetCopy)
+        setSortedBudget(sortedBudgetCopy);
+        setUsedArr(sortedBudget)
     };
-
+    
     const sortByDate = () => {
-        const sortedBudget = [...budget].sort((a, b) => a.date - b.date ? 1 : -1);
-        setBudget(sortedBudget);
+        const arr = [...budget];
+        const sortedBudgetCopy = arr.sort((a, b) => {
+            const keyA = a[Object.keys(a)[0]].date; 
+            const keyB = b[Object.keys(b)[0]].date; 
+            const ascOrder = keyA.localeCompare(keyB);
+            const dscOrder = keyB.localeCompare(keyA);
+            return dateOrder === "asc" ? ascOrder : dscOrder;
+        });
+        
+        console.log("date sortedBudgetCopy: ", sortedBudgetCopy)
+        setUsedArr(sortedBudget)
+        setSortedBudget(sortedBudgetCopy);
     };
 
     const resetOrder = () => {
-        const sortedBudget = [...budget].sort((a, b) => a.budgetItemNumber - b.budgetItemNumber ? 1 : -1);
-        setBudget(sortedBudget);
+        setUsedArr(budget)
     };
 
     useEffect(() => {
@@ -30,6 +50,10 @@ const Budget = () => {
             setIsBudgetSubmitted(false)
         }
     }, [subTotal])
+
+    useEffect(() => {
+        setUsedArr(budget)
+    }, [budget])
 
     return (
         <>
@@ -68,9 +92,15 @@ const Budget = () => {
                 <div className="budget">
                     <h3>Budget Summary</h3>
                     <div>
-                        <ButtonGroup sortByTitle={sortByTitle} sortByDate={sortByDate} resetOrder={resetOrder}/>
+                        <ButtonGroup 
+                            sortByTitle={sortByTitle} 
+                            sortByDate={sortByDate} 
+                            resetOrder={resetOrder} 
+                            setDateOrder={setDateOrder}
+                            dateOrder={dateOrder}
+                        />
                     </div>
-                    {budget.map((item, index) => (
+                    {usedArr.map((item, index) => (
                         <div className="budget-card" key={index}>
                             <h3>{Object.keys(item)[0]}</h3>
                             <ul className="budget-summary">

@@ -10,8 +10,20 @@ type SubTotal = {
     webCalc?: number;
 };
 
+// type BudgetItem = {
+//     [title: string]: SubTotal;
+// };
+
 type BudgetItem = {
-    [title: string]: SubTotal;
+    [key: string]: {
+        ads: number;
+        budgetElement: number;
+        budgetItemNumber: number;
+        clientName: string;
+        date: string;
+        seo: number;
+        webCalc: number;
+    };
 };
 
 const useTotalHandler = () => {
@@ -61,7 +73,7 @@ const useTotalHandler = () => {
         setBudgetItemNumber((prev) => prev + 1);
     }
 
-console.log("budget: ", budget);
+    console.log("budget: ", budget);
     const budgetHandler = (title: string, clientName: string) => {
         budgetItemNumberHandler();
         const date = new Date().toLocaleString();
