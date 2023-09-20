@@ -12,7 +12,7 @@ const ButtonGroup = ({ sortByTitle, sortByDate, resetOrder, setDateOrder, dateOr
                     sortByDate()
                     handleDateOrder()
                 }}>
-                    📅 {dateOrder === 'asc' ? '⬇️' : '⬆️'}
+                    📅 {dateOrder === 'asc' ? '⬆️' : '⬇️'}
                 </button>
                 <button className="btn join-item" onClick={resetOrder}>🔄</button>
             </div>
