@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import BudgetInput from './BudgetInput';
 import useTotalHandler from '../hooks/useTotalHandler';
 import ButtonGroup from './ButtonGroup';
+import Search from './Search';
 
 const Budget = () => {
     const [budgetName, setBudgetName] = useState("");
@@ -10,7 +11,7 @@ const Budget = () => {
     const [sortedBudget, setSortedBudget] = useState([]);
     const [dateOrder, setDateOrder] = useState<"asc" | "dsc">("asc");
     const { total, subTotal, webCalc, budget, budgetHandler, updateTotal, webSubTotal } = useTotalHandler();
-    const [usedArr, setUsedArr] = useState<typeof budget | typeof sortedBudget>(budget)
+    const [usedArr, setUsedArr] = useState<typeof budget | typeof sortedBudget>([...budget])
     const budgetLength = budget.length;
 
     const sortByTitle = () => {
@@ -63,6 +64,16 @@ const Budget = () => {
         setUsedArr(budget)
     }, [budget])
 
+    const handleSearch = (searchText) => {
+        // Filter the budget array based on the search text
+        const filteredBudget = budget.filter((item) => {
+            const title = Object.keys(item)[0];
+            return title.toLowerCase().includes(searchText.toLowerCase());
+        });
+
+        setUsedArr(filteredBudget); // Update the displayed array
+    };
+
     return (
         <>
             <label>
@@ -99,7 +110,7 @@ const Budget = () => {
             {budgetLength > 0 &&
                 <div className="budget">
                     <h3>Budget Summary</h3>
-                    <div>
+                    <div className="filters">
                         <ButtonGroup
                             sortByTitle={sortByTitle}
                             sortByDate={sortByDate}
@@ -107,6 +118,7 @@ const Budget = () => {
                             setDateOrder={setDateOrder}
                             dateOrder={dateOrder}
                         />
+                        <Search onSearch={handleSearch}/>
                     </div>
                     {usedArr.map((item, index) => (
                         <div className="budget-card" key={index}>
