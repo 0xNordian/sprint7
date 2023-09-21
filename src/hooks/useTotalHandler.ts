@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react';
 import useLocalStorage from './useLocalStorage';
+import Budget from '../components/Budget';
 
-type SubTotal = {
+export type SubTotal = {
     web?: number;
     seo?: number;
     ads?: number;
@@ -10,11 +11,7 @@ type SubTotal = {
     webCalc?: number;
 };
 
-// type BudgetItem = {
-//     [title: string]: SubTotal;
-// };
-
-type BudgetItem = {
+export type BudgetItem = {
     [key: string]: {
         ads: number;
         budgetElement: number;
@@ -25,6 +22,17 @@ type BudgetItem = {
         webCalc: number;
     };
 };
+
+export type OutputsTypes = {
+    total: number, 
+    subTotal: number, 
+    budget: BudgetItem, 
+    webCalc: number, 
+    updateTotal: () => void, 
+    webSubTotal: () => void, 
+    budgetHandler: () => void, 
+    setBudget: []
+}
 
 const useTotalHandler = () => {
     const [total, setTotal] = useState(0);
