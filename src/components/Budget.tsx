@@ -66,90 +66,93 @@ const Budget = () => {
     };
 
     return (
-        <>
-            <label>
-                {"Budget title: "}
-                <input
-                    type="text"
-                    id={"budget"}
-                    value={budgetName}
-                    onChange={(e) => setBudgetName(e.target.value)} />
-            </label>
-            <label>
-                {"Client name: "}
-                <input
-                    type="text"
-                    id={"client"}
-                    value={clientName}
-                    onChange={(e) => setClientName(e.target.value)} />
-            </label>
-            <BudgetInput
-                updateTotal={updateTotal}
-                webSubTotal={webSubTotal}
-                setBudgetName={setBudgetName}
-                setClientName={setClientName}
-                total={total}
-                webCalc={webCalc}
-                isBudgetSubmitted={isBudgetSubmitted}
-            />
-            <button onClick={() => {
-                budgetHandler(budgetName, clientName)
-                setIsBudgetSubmitted(true)
-            }
-            }>Submit Budget</button>
-
-            {budgetLength > 0 &&
-                <div className="budget">
-                    <h3>Budget Summary</h3>
-                    <div className="filters">
-                        <ButtonGroup
-                            sortByTitle={sortByTitle}
-                            sortByDate={sortByDate}
-                            resetOrder={resetOrder}
-                            setDateOrder={setDateOrder}
-                            dateOrder={dateOrder}
-                        />
-                        <Search onSearch={handleSearch}/>
-                    </div>
-                    {usedArr.map((item: { [key: string]: any }, index: number) => (
-                        <div className="budget-card" key={index}>
-                            <h3>{Object.keys(item)[0]}</h3>
-                            <ul className="budget-summary">
-                                {item[Object.keys(item)[0]].web > 0 &&
-                                    <li>
-                                        <strong>web:</strong> {item[Object.keys(item)[0]].web}€
-                                    </li>
-                                }
-                                <ul>
-                                    {(item[Object.keys(item)[0]].numLang > 0 || item[Object.keys(item)[0]].numPages > 0) &&
-                                        <>
-                                            <li>Number of pages: {item[Object.keys(item)[0]].numPages}</li>
-                                            <li>Number of languages: {item[Object.keys(item)[0]].numLang}</li>
-                                            <li>SubTotal: {Math.max(1, item[Object.keys(item)[0]].numLang) * Math.max(1, item[Object.keys(item)[0]].numPages) * 30}€ for {item[Object.keys(item)[0]].numLang + item[Object.keys(item)[0]].numPages} extras</li>
-                                        </>
-                                    }
-                                </ul>
-                                {item[Object.keys(item)[0]].seo > 0 &&
-                                    <li>
-                                        <strong>seo:</strong> {item[Object.keys(item)[0]].seo}€
-                                    </li>
-                                }
-                                {item[Object.keys(item)[0]].ads &&
-                                    <li>
-                                        <strong>ads:</strong> {item[Object.keys(item)[0]].ads}€
-                                    </li>
-                                }
-                                <p><strong>Total:</strong> {item[Object.keys(item)[0]].budgetElement}€</p>
-                            </ul>
-                            <div className="extra-info">
-                                <small className="date">{item[Object.keys(item)[0]].date}</small>
-                                <small className="date">{item[Object.keys(item)[0]].clientName}</small>
-                            </div>
+        <main className="main-container">
+            <div className="budget-form">
+                <label>
+                    {"Budget title: "}
+                    <input
+                        type="text"
+                        id={"budget"}
+                        value={budgetName}
+                        onChange={(e) => setBudgetName(e.target.value)} />
+                </label>
+                <label>
+                    {"Client name: "}
+                    <input
+                        type="text"
+                        id={"client"}
+                        value={clientName}
+                        onChange={(e) => setClientName(e.target.value)} />
+                </label>
+                <BudgetInput
+                    updateTotal={updateTotal}
+                    webSubTotal={webSubTotal}
+                    setBudgetName={setBudgetName}
+                    setClientName={setClientName}
+                    total={total}
+                    webCalc={webCalc}
+                    isBudgetSubmitted={isBudgetSubmitted}
+                />
+                <button onClick={() => {
+                    budgetHandler(budgetName, clientName)
+                    setIsBudgetSubmitted(true)
+                }
+                }>Submit Budget</button>
+            </div>
+            <div className="budget-dashboard">
+                {budgetLength > 0 &&
+                    <div className="budget">
+                        <h3>Budget Summary</h3>
+                        <div className="filters">
+                            <ButtonGroup
+                                sortByTitle={sortByTitle}
+                                sortByDate={sortByDate}
+                                resetOrder={resetOrder}
+                                setDateOrder={setDateOrder}
+                                dateOrder={dateOrder}
+                            />
+                            <Search onSearch={handleSearch} />
                         </div>
-                    ))}
-                </div>
-            }
-        </>
+                        {usedArr.map((item: { [key: string]: any }, index: number) => (
+                            <div className="budget-card" key={index}>
+                                <h3>{Object.keys(item)[0]}</h3>
+                                <ul className="budget-summary">
+                                    {item[Object.keys(item)[0]].web > 0 &&
+                                        <li>
+                                            <strong>web:</strong> {item[Object.keys(item)[0]].web}€
+                                        </li>
+                                    }
+                                    <ul>
+                                        {(item[Object.keys(item)[0]].numLang > 0 || item[Object.keys(item)[0]].numPages > 0) &&
+                                            <>
+                                                <li>Number of pages: {item[Object.keys(item)[0]].numPages}</li>
+                                                <li>Number of languages: {item[Object.keys(item)[0]].numLang}</li>
+                                                <li>SubTotal: {Math.max(1, item[Object.keys(item)[0]].numLang) * Math.max(1, item[Object.keys(item)[0]].numPages) * 30}€ for {item[Object.keys(item)[0]].numLang + item[Object.keys(item)[0]].numPages} extras</li>
+                                            </>
+                                        }
+                                    </ul>
+                                    {item[Object.keys(item)[0]].seo > 0 &&
+                                        <li>
+                                            <strong>seo:</strong> {item[Object.keys(item)[0]].seo}€
+                                        </li>
+                                    }
+                                    {item[Object.keys(item)[0]].ads &&
+                                        <li>
+                                            <strong>ads:</strong> {item[Object.keys(item)[0]].ads}€
+                                        </li>
+                                    }
+                                    <p><strong>Total:</strong> {item[Object.keys(item)[0]].budgetElement}€</p>
+                                </ul>
+                                <div className="extra-info">
+                                    <small className="date">{item[Object.keys(item)[0]].date}</small>
+                                    <small className="date">{item[Object.keys(item)[0]].clientName}</small>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                }
+            </div>
+        </main>
     )
 }
 

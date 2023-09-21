@@ -80,7 +80,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: 100%;
+  width: 30vw;
   border: 2px solid gray;
   border-radius: 5px;
 }
@@ -200,4 +200,20 @@ input[type="number"] {
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
+}
+
+.main-container{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 3rem;
+  width: 80vw;
+  /* outline: auto; */
+}
+
+.budget-form{
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  /* outline: auto; */
 }
