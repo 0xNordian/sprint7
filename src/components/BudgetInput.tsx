@@ -1,7 +1,18 @@
 import Services from '../components/Services'
 import data from '../utils/dataExtractor'
 
-const BudgetInput = ({ total, webCalc, updateTotal, webSubTotal, isBudgetSubmitted, setBudgetName, setClientName }) => {
+export type ServicesProps = {
+    label: string;
+    price: number;
+    message: string;
+    updateTotal: (label: string, price: number, isChecked: boolean) => void;
+    webSubTotal: (spec: string, qty: number) => void;
+    isBudgetSubmitted: boolean;
+    setBudgetName?: (budgetName: string) => void;
+    setClientName?: (clientName: string) => void;
+};
+
+const BudgetInput = ({ total, webCalc, updateTotal, webSubTotal, isBudgetSubmitted, setBudgetName, setClientName }: ServicesProps) => {
     return (
         <div className="services">
             {data.map((service =>
