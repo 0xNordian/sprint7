@@ -1,7 +1,19 @@
-const ButtonGroup = ({ sortByTitle, sortByDate, resetOrder, setDateOrder, dateOrder }) => {
+type ButtonGroupProps = {
+    sortByTitle: () => void;
+    sortByDate: () => void;
+    resetOrder: () => void;
+    setDateOrder: (order: 'asc' | 'desc') => void;
+    dateOrder: 'asc' | 'desc';
+}
 
+const ButtonGroup: React.FC<ButtonGroupProps> = ({ 
+    sortByTitle, 
+    sortByDate, 
+    resetOrder, 
+    setDateOrder, 
+    dateOrder }) => {
     const handleDateOrder = () => {
-        setDateOrder(prev => prev === 'asc' ? 'desc' : 'asc');
+        setDateOrder(dateOrder === 'asc' ? 'desc' : 'asc');
     };
 
     return (

@@ -3,13 +3,14 @@ import BudgetInput from './BudgetInput';
 import useTotalHandler from '../hooks/useTotalHandler';
 import ButtonGroup from './ButtonGroup';
 import Search from './Search';
+// import { BudgetItem } from '../hooks/useTotalHandler';
 
 const Budget = () => {
     const [budgetName, setBudgetName] = useState("");
     const [clientName, setClientName] = useState("");
     const [isBudgetSubmitted, setIsBudgetSubmitted] = useState(false);
     const [sortedBudget, setSortedBudget] = useState<typeof budget>([]);
-    const [dateOrder, setDateOrder] = useState<"asc" | "dsc">("asc");
+    const [dateOrder, setDateOrder] = useState<"asc" | "desc">("asc");
     const { total, subTotal, webCalc, budget, budgetHandler, updateTotal, webSubTotal } = useTotalHandler();
     const [usedArr, setUsedArr] = useState<typeof budget | typeof sortedBudget>([...budget])
     const budgetLength = budget.length;

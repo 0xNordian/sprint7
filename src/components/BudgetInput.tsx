@@ -1,7 +1,18 @@
 import Services from '../components/Services'
 import data from '../utils/dataExtractor'
+import { SubTotal } from '../hooks/useTotalHandler'
 
-const BudgetInput = ({ total, webCalc, updateTotal, webSubTotal, isBudgetSubmitted, setBudgetName, setClientName }) => {
+type BudgetInputProps = {
+    total: number;
+    webCalc: number;
+    updateTotal: (label: keyof SubTotal, price: number, isChecked: boolean) => void;
+    webSubTotal: (spec: keyof SubTotal, qty: number) => void;
+    isBudgetSubmitted: boolean;
+    setBudgetName: (budgetName: string) => void;
+    setClientName: (clientName: string) => void;
+}
+
+const BudgetInput = ({ total, webCalc, updateTotal, webSubTotal, isBudgetSubmitted, setBudgetName, setClientName }: BudgetInputProps) => {
     return (
         <div className="services">
             {data.map((service =>
