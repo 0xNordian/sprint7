@@ -8,7 +8,7 @@ const Budget = () => {
     const [budgetName, setBudgetName] = useState("");
     const [clientName, setClientName] = useState("");
     const [isBudgetSubmitted, setIsBudgetSubmitted] = useState(false);
-    const [sortedBudget, setSortedBudget] = useState([]);
+    const [sortedBudget, setSortedBudget] = useState<typeof budget>([]);
     const [dateOrder, setDateOrder] = useState<"asc" | "dsc">("asc");
     const { total, subTotal, webCalc, budget, budgetHandler, updateTotal, webSubTotal } = useTotalHandler();
     const [usedArr, setUsedArr] = useState<typeof budget | typeof sortedBudget>([...budget])
@@ -22,14 +22,9 @@ const Budget = () => {
             const keyB = Object.keys(b)[0];
             return keyA.localeCompare(keyB);
         });
-        console.log("title sortedBudgetCopy: ", sortedBudgetCopy)
 
-        // Set usedArr to sortedBudgetCopy
         setUsedArr(sortedBudgetCopy);
-
-        // Set sortedBudget state
         setSortedBudget(sortedBudgetCopy);
-
     };
 
     const sortByDate = () => {
@@ -42,11 +37,7 @@ const Budget = () => {
             return dateOrder === "asc" ? ascOrder : dscOrder;
         });
 
-        console.log("date sortedBudgetCopy: ", sortedBudgetCopy)
-        // Set usedArr to sortedBudgetCopy
         setUsedArr(sortedBudgetCopy);
-
-        // Set sortedBudget state
         setSortedBudget(sortedBudgetCopy);
     };
 
@@ -64,14 +55,13 @@ const Budget = () => {
         setUsedArr(budget)
     }, [budget])
 
-    const handleSearch = (searchText) => {
-        // Filter the budget array based on the search text
-        const filteredBudget = budget.filter((item) => {
+    const handleSearch = (searchText: string) => {
+        const filteredBudget = budget.filter((item: { [key: string]: any }) => {
             const title = Object.keys(item)[0];
             return title.toLowerCase().includes(searchText.toLowerCase());
         });
 
-        setUsedArr(filteredBudget); // Update the displayed array
+        setUsedArr(filteredBudget);
     };
 
     return (
@@ -120,7 +110,7 @@ const Budget = () => {
                         />
                         <Search onSearch={handleSearch}/>
                     </div>
-                    {usedArr.map((item, index) => (
+                    {usedArr.map((item: { [key: string]: any }, index: number) => (
                         <div className="budget-card" key={index}>
                             <h3>{Object.keys(item)[0]}</h3>
                             <ul className="budget-summary">
