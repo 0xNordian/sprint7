@@ -23,7 +23,7 @@ const useTotalHandler = () => {
             }
             const keysToExclude = ['numLang', 'numPages'];
             const calculatedTotal = Object.values(updatedSubTotal)
-                .filter(key => !keysToExclude.includes(key))
+                // .filter(key => !keysToExclude.includes(key))
                 .reduce((acc, val) => acc + (val || 0), 0);
             setTotal(calculatedTotal);
             return updatedSubTotal;
